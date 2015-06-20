@@ -4,8 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 
 /**
  * JSFのバッキングビーン。
@@ -13,7 +13,7 @@ import javax.faces.bean.RequestScoped;
  * index.xhtmlからEL式経由で使用される。
  *
  */
-@ManagedBean
+@Named
 @RequestScoped
 public class JavaYouBean {
 
