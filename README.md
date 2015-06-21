@@ -11,6 +11,7 @@
 * JAX-RS
 * CDI
 * Concurrency Utilities for Java EE
+* JPA
 
 Java EEフォーエバー(～ 'ω' )～
 
