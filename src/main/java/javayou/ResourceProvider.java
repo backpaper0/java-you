@@ -4,6 +4,8 @@ import javax.annotation.Resource;
 import javax.enterprise.concurrent.ManagedExecutorService;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  * JNDIリソースやJPAのエンティティマネージャなどとCDIを繋ぐためのクラス。
@@ -21,9 +23,18 @@ public class ResourceProvider {
     @Resource(name = "DefaultManagedExecutorService")
     private ManagedExecutorService executor;
 
+    @PersistenceContext(unitName = "defaultUnit")
+    private EntityManager entityManager;
+
     @Produces
     @Dependent
     public ManagedExecutorService getExecutor() {
         return executor;
+    }
+
+    @Produces
+    @Dependent
+    public EntityManager getEntityManager() {
+        return entityManager;
     }
 }

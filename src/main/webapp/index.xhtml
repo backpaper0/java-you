@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
-  xmlns:h="http://xmlns.jcp.org/jsf/html">
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
   <h:head>
     <title>あなたと○○、今すぐ○○</title>
   </h:head>
@@ -11,9 +11,16 @@
       、
       今すぐ
       <h:inputText value="#{javaYouBean.text2}" />
-      <h:commandButton value="ジェネレート" action="#{javaYouBean.generate}" />
+      <h:commandButton value="ジェネレート" actionListener="#{javaYouBean.generate}" />
       <hr />
       <h:graphicImage value="#{javaYouBean.imageUrl}" />
+      <hr />
+      これまで作ったあなたと○○
+      <ul>
+        <ui:repeat value="#{javaYouBean.logs}" var="log">
+          <li>あなたと#{log.text1}、今すぐ#{log.text2}(#{log.createdAt})</li>
+        </ui:repeat>
+      </ul>
     </h:form>
   </h:body>
 </html>
