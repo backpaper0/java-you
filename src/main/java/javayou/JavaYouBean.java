@@ -40,8 +40,6 @@ public class JavaYouBean {
      * 初期化してしまう。
      * (プロキシクラスのインスタンスはフィールドを使わないので初期化する
      * 必要がない)
-     * 
-     * ……と言いつつ、このバッキングビーンはCDI管理ビーンにしていない(・ω<) ﾃﾍﾍﾟﾛ
      */
     @PostConstruct
     public void init() {
