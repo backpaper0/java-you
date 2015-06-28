@@ -1,18 +1,15 @@
 package javayou;
 
+import fish.payara.micro.BootstrapException;
+import fish.payara.micro.PayaraMicro;
+import org.glassfish.embeddable.archive.ScatteredArchive;
+import org.glassfish.embeddable.archive.ScatteredArchive.Type;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
-import javayou.JaxrsApplication;
-
-import org.glassfish.embeddable.archive.ScatteredArchive;
-import org.glassfish.embeddable.archive.ScatteredArchive.Type;
-
-import fish.payara.micro.BootstrapException;
-import fish.payara.micro.PayaraMicro;
 
 public class JavaYou {
 
@@ -29,8 +26,19 @@ public class JavaYou {
 
         archive.addClassPath(classpath);
 
+        // IDEA向けの雑な対応
+        addClassPathIfExists(archive, "build/classes/main");
+        addClassPathIfExists(archive, "build/resources/main");
+
         File war = new File(archive.toURI());
 
         PayaraMicro.getInstance().addDeploymentFile(war).bootStrap();
+    }
+
+    private static void addClassPathIfExists(ScatteredArchive archive, String target) throws IOException {
+        File file = new File(target);
+        if (file.exists()) {
+            archive.addClassPath(file);
+        }
     }
 }
