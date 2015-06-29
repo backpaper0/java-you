@@ -1,3 +1,17 @@
+import org.ajoberstar.grgit.Grgit
+
+ext.repo = Grgit.open(project.file('.'))
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath('org.ajoberstar:gradle-git:1.1.0')
+    }
+}
+
 apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'eclipse'
@@ -17,3 +31,13 @@ dependencies {
     providedCompile 'javax:javaee-api:7.0'
     testCompile 'fish.payara.extras:payara-micro:4.1.152.1'
 }
+
+task writeHeadCommitHash << {
+    def file = new File(buildDir, 'git/head')
+    file.parentFile.mkdirs()
+    file.write(repo.head().id)
+}
+
+war.classpath new File(buildDir, 'git')
+
+war.dependsOn writeHeadCommitHash
