@@ -22,7 +22,7 @@
         </ui:repeat>
       </ul>
       <hr />
-      commit #{gitCommitHashResource.head}
+      commit <h:outputLink value="https://github.com/backpaper0/java-you/tree/#{gitCommitHashResource.head}">#{gitCommitHashResource.head}</h:outputLink>
     </h:form>
   </h:body>
 </html>
