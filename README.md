@@ -24,12 +24,22 @@ IDEで `src/test/java/javayou/JavaYou.java` を実行する。
 Macは ``-Djava.net.preferIPv4Stack=true`` を付けないとクラスタ様が組んでくだされない様子(2015-06-29現在)。
 
 ```
-gradle --daemon build
+gradlew --daemon build
 java -Djava.net.preferIPv4Stack=true -jar ~/payara-micro-4.1.152.1.jar --deploy ./build/libs/java-you.war
 ```
 
 "Deployed 1 wars"というログが出たら起動完了。
 http://localhost:8080/java-you/ を今すぐ開いてあなたとJAVA！
+
+### Docker
+
+Dockerfileも用意してみたのでイメージ作ってみるも良し！
+タスク作ったのでGradleでビルドできるます。
+
+```
+gradlew --daemon dockerBuild
+docker run -d -p 8080:8080 java-you
+```
 
 ## Roadmap
 
