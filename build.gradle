@@ -41,3 +41,10 @@ task writeHeadCommitHash << {
 war.classpath new File(buildDir, 'git')
 
 war.dependsOn writeHeadCommitHash
+
+task dockerBuild << {
+    def proc = "docker build -t java-you .".execute()
+    proc.waitForProcessOutput(System.out, System.err)
+}
+
+dockerBuild.dependsOn war
