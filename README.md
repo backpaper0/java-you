@@ -12,6 +12,7 @@
 * CDI
 * Concurrency Utilities for Java EE
 * JPA
+* Bean Validation
 
 Java EEフォーエバー(～ 'ω' )～
 

@@ -13,6 +13,9 @@ import javax.enterprise.concurrent.ManagedExecutorService;
 import javax.enterprise.context.RequestScoped;
 import javax.imageio.ImageIO;
 import javax.inject.Inject;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -38,7 +41,7 @@ public class JavaYouResource {
      */
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public void generate(@BeanParam Texts texts,
+    public void generate(@Valid @BeanParam Texts texts,
             @Suspended AsyncResponse response) {
 
         //CompletableFutureで(無駄に)非同期処理をしている。
@@ -82,12 +85,16 @@ public class JavaYouResource {
         /**
          * 1つ目の○○に入れる文字列
          */
+        @NotNull
+        @Size(min = 1)
         @QueryParam("text1")
         public String text1;
 
         /**
          * 2つ目の○○に入れる文字列
          */
+        @NotNull
+        @Size(min = 1)
         @QueryParam("text2")
         public String text2;
     }
