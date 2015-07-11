@@ -22,8 +22,9 @@ public class CharsetFilter implements ContainerResponseFilter {
     public void filter(ContainerRequestContext requestContext,
             ContainerResponseContext responseContext) throws IOException {
 
-        if (responseContext.getMediaType().isCompatible(
-                MediaType.TEXT_PLAIN_TYPE)) {
+        if (responseContext.getMediaType() != null
+                && responseContext.getMediaType().isCompatible(
+                        MediaType.TEXT_PLAIN_TYPE)) {
 
             Object entity = responseContext.getEntity();
             Annotation[] annotations = responseContext.getEntityAnnotations();
