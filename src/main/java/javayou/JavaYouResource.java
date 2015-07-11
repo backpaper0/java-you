@@ -13,6 +13,7 @@ import javax.enterprise.concurrent.ManagedExecutorService;
 import javax.enterprise.context.RequestScoped;
 import javax.imageio.ImageIO;
 import javax.inject.Inject;
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -31,15 +32,14 @@ public class JavaYouResource {
     /**
      * 「あなたと○○、今すぐ○○」画像を生成するリソースメソッド。
      * 
-     * @param text1 1つ目の○○に入れる文字列
-     * @param text2 2つ目の○○に入れる文字列
+     * @param texts ○○に入れる文字列をまとめたオブジェクト
      * @param response JAX-RSの非同期処理で使用するクラス。
      *                 別スレッドで処理を行って結果をresponse.resume()メソッドへ渡す。
      */
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public void generate(@QueryParam("text1") String text1,
-            @QueryParam("text2") String text2, @Suspended AsyncResponse response) {
+    public void generate(@BeanParam Texts texts,
+            @Suspended AsyncResponse response) {
 
         //CompletableFutureで(無駄に)非同期処理をしている。
         CompletableFuture.runAsync(() -> {
@@ -55,9 +55,9 @@ public class JavaYouResource {
 
                 //Java + You, Download Today!
                 g.drawString("あなたと", 40, 80);
-                g.drawString(text1, 60, 120);
+                g.drawString(texts.text1, 60, 120);
                 g.drawString("今すぐ", 290, 380);
-                g.drawString(text2, 300, 420);
+                g.drawString(texts.text2, 300, 420);
 
                 //Graphics2Dをいじったら忘れずdisposeする
                 g.dispose();
@@ -75,5 +75,20 @@ public class JavaYouResource {
             }
         }, executor);
         //Java EE環境ではexecutorの指定をしてサーバが管理しているスレッドを使うようにする
+    }
+
+    public static class Texts {
+
+        /**
+         * 1つ目の○○に入れる文字列
+         */
+        @QueryParam("text1")
+        public String text1;
+
+        /**
+         * 2つ目の○○に入れる文字列
+         */
+        @QueryParam("text2")
+        public String text2;
     }
 }
