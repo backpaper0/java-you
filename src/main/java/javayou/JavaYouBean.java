@@ -10,6 +10,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * JSFのバッキングビーン。
@@ -70,6 +72,8 @@ public class JavaYouBean {
         }
     }
 
+    @NotNull
+    @Size(min = 1)
     public String getText1() {
         return text1;
     }
@@ -78,6 +82,8 @@ public class JavaYouBean {
         this.text1 = text1;
     }
 
+    @NotNull
+    @Size(min = 1)
     public String getText2() {
         return text2;
     }
