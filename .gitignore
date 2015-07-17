@@ -3,3 +3,6 @@
 /derby.log
 /.*
 !/.gitignore
+/*.iml
+/*.ipr
+/*.iws
