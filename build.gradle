@@ -20,12 +20,10 @@ dependencies {
 
 task writeHeadCommitHash << {
     def proc = 'git rev-parse @'.execute()
-    def file = new File(buildDir, 'git/head')
+    def file = new File(processResources.destinationDir, 'head')
     file.parentFile.mkdirs()
-    file.write(proc.text)
+    file.write(proc.text.trim())
 }
-
-war.classpath new File(buildDir, 'git')
 
 war.dependsOn writeHeadCommitHash
 
