@@ -22,11 +22,10 @@ IDEで `src/test/java/javayou/JavaYou.java` を実行する。
 
 もしくは[Gradle](https://gradle.org/)でビルドして[Payara Micro](http://www.payara.co/introducing_payara_micro)のJARで動かす。
 私の環境でのコマンド例はこちら。
-Macは ``-Djava.net.preferIPv4Stack=true`` を付けないとクラスタ様が組んでくだされない様子(2015-06-29現在)。
 
 ```
 gradlew --daemon build
-java -Djava.net.preferIPv4Stack=true -jar ~/payara-micro-4.1.152.1.jar --deploy ./build/libs/java-you.war
+java -jar ~/payara-micro-4.1.152.1.jar --deploy ./build/libs/java-you.war
 ```
 
 "Deployed 1 wars"というログが出たら起動完了。
