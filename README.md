@@ -25,7 +25,7 @@ IDEで `src/test/java/javayou/JavaYou.java` を実行する。
 
 ```
 gradlew --daemon build
-java -jar ~/payara-micro-4.1.152.1.jar --deploy ./build/libs/java-you.war
+java -jar ~/payara-micro-4.1.153.jar --deploy ./build/libs/java-you.war
 ```
 
 "Deployed 1 wars"というログが出たら起動完了。
