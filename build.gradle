@@ -33,3 +33,13 @@ task dockerBuild << {
 }
 
 dockerBuild.dependsOn war
+
+task run << {
+    def payaraJar = configurations.testCompile.find { it.name ==~ /payara-micro.*/ }
+    def javaYouWar = war.archivePath
+    def proc = "java -jar $payaraJar --deploy $javaYouWar".execute()
+    Runtime.runtime.addShutdownHook(new Thread({ -> proc.destroy() } as Runnable))
+    proc.waitForProcessOutput(System.out, System.err)
+}
+
+run.dependsOn war
