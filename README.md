@@ -24,7 +24,7 @@ IDEで `src/test/java/javayou/JavaYou.java` を実行する。
 私の環境でのコマンド例はこちら。
 
 ```
-gradlew --daemon build
+gradlew build
 java -jar ~/payara-micro-4.1.153.jar --deploy ./build/libs/java-you.war
 ```
 
@@ -37,7 +37,7 @@ Dockerfileも用意してみたのでイメージ作ってみるも良し！
 タスク作ったのでGradleでビルドできるます。
 
 ```
-gradlew --daemon dockerBuild
+gradlew dockerBuild
 docker run -d -p 8080:8080 java-you
 ```
 
