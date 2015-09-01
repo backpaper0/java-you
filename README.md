@@ -21,11 +21,10 @@ Java EEフォーエバー(～ 'ω' )～
 IDEで `src/test/java/javayou/JavaYou.java` を実行する。
 
 もしくは[Gradle](https://gradle.org/)でビルドして[Payara Micro](http://www.payara.co/introducing_payara_micro)のJARで動かす。
-私の環境でのコマンド例はこちら。
+Payara Microで動かすためのGradleタスクを書いたので次のコマンドで実行できる。
 
 ```
-gradlew build
-java -jar ~/payara-micro-4.1.153.jar --deploy ./build/libs/java-you.war
+gradlew run
 ```
 
 "Deployed 1 wars"というログが出たら起動完了。
