@@ -27,19 +27,16 @@ task writeHeadCommitHash << {
 
 war.dependsOn writeHeadCommitHash
 
-task dockerBuild << {
-    def proc = "docker build -t java-you .".execute()
-    proc.waitForProcessOutput(System.out, System.err)
+task dockerBuild(type:Exec) {
+    commandLine 'docker', 'build', '-t', 'java-you'
 }
 
 dockerBuild.dependsOn war
 
-task run << {
+task run(type:Exec) {
     def payaraJar = configurations.testCompile.find { it.name ==~ /payara-micro.*/ }
-    def javaYouWar = war.archivePath
-    def proc = "java -jar $payaraJar --deploy $javaYouWar".execute()
-    Runtime.runtime.addShutdownHook(new Thread({ -> proc.destroy() } as Runnable))
-    proc.waitForProcessOutput(System.out, System.err)
+    def warFile = war.archivePath
+    commandLine 'java', '-jar', "$payaraJar", '--deploy', "$warFile"
 }
 
 run.dependsOn war
