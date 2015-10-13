@@ -20,10 +20,10 @@ public class ResourceProvider {
     /**
      * アプリケーションサーバ(Payara)にデフォルトで定義されているManagedExecutorService
      */
-    @Resource(name = "DefaultManagedExecutorService")
+    @Resource
     private ManagedExecutorService executor;
 
-    @PersistenceContext(unitName = "defaultUnit")
+    @PersistenceContext
     private EntityManager entityManager;
 
     @Produces
