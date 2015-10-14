@@ -19,6 +19,8 @@ dependencies {
     testCompile 'fish.payara.extras:payara-micro:4.1.153'
 }
 
+//HEADコミットのハッシュ値を書き出すタスク。
+//warに含めておいてどのコミットから作成されたものか分かるようにしたい。
 task writeHeadCommitHash << {
     def proc = 'git rev-parse @'.execute()
     def file = new File(processResources.destinationDir, 'head')
@@ -28,12 +30,14 @@ task writeHeadCommitHash << {
 
 war.dependsOn writeHeadCommitHash
 
+//Dockerでjava-youというタグを付けてビルドするタスク。
 task dockerBuild(type:Exec) {
     commandLine 'docker', 'build', '-t', 'java-you'
 }
 
 dockerBuild.dependsOn war
 
+//Payara Microで動かすタスク。
 task run(type:Exec) {
     def payaraJar = configurations.testCompile.find { it.name ==~ /payara-micro.*/ }
     def warFile = war.archivePath
