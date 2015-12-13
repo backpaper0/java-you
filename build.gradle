@@ -40,7 +40,7 @@ dockerBuild.dependsOn war
 task run(type:Exec) {
     def payaraJar = configurations.testCompile.find { it.name ==~ /payara-micro.*/ }
     def warFile = war.archivePath
-    commandLine 'java', '-jar', "$payaraJar", '--deploy', "$warFile"
+    commandLine 'java', '-jar', "$payaraJar", '--noCluster', '--deploy', "$warFile"
 }
 
 run.dependsOn war
