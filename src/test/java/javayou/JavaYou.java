@@ -32,7 +32,8 @@ public class JavaYou {
 
         File war = new File(archive.toURI());
 
-        PayaraMicro.getInstance().addDeploymentFile(war).bootStrap();
+        PayaraMicro.getInstance().addDeploymentFile(war).setNoCluster(true)
+                .bootStrap();
     }
 
     private static void addClassPathIfExists(ScatteredArchive archive, String target) throws IOException {
