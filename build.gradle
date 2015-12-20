@@ -31,7 +31,7 @@ war.dependsOn writeHeadCommitHash
 
 //Dockerでjava-youというタグを付けてビルドするタスク。
 task dockerBuild(type:Exec) {
-    commandLine 'docker', 'build', '-t', 'java-you'
+    commandLine 'docker', 'build', '-t', 'java-you', '.'
 }
 
 dockerBuild.dependsOn war
