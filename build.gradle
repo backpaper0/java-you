@@ -29,12 +29,17 @@ task writeHeadCommitHash << {
 
 war.dependsOn writeHeadCommitHash
 
+task copyPayaraJar(type: Copy) {
+    from configurations.testCompile.find { it.name ==~ /payara-micro.*/ }
+    into file('build')
+}
+
 //Dockerでjava-youというタグを付けてビルドするタスク。
 task dockerBuild(type:Exec) {
     commandLine 'docker', 'build', '-t', 'java-you', '.'
 }
 
-dockerBuild.dependsOn war
+dockerBuild.dependsOn copyPayaraJar, war
 
 //Payara Microで動かすタスク。
 task run(type:Exec) {
