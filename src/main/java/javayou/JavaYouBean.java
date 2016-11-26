@@ -1,7 +1,5 @@
 package javayou;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -12,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.ws.rs.core.UriBuilder;
 
 /**
  * JSFのバッキングビーン。
@@ -64,12 +63,10 @@ public class JavaYouBean {
     }
 
     private void buildImageUrl() {
-        try {
-            imageUrl = "/api/generate?text1="
-                    + URLEncoder.encode(text1, "UTF-8") + "&text2="
-                    + URLEncoder.encode(text2, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-        }
+        imageUrl = UriBuilder.fromPath("/api/generate")
+                .queryParam("text1", text1)
+                .queryParam("text2", text2)
+                .build().toString();
     }
 
     @NotNull
