@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -29,6 +30,8 @@ public class JavaYouBean {
 
     @Inject
     private EntityManager em;
+    @Inject
+    private Event<JavaYouEvent> event;
 
     /*
      * Java EEアプリケーションではインスタンスフィールドの初期化は
@@ -56,10 +59,7 @@ public class JavaYouBean {
         logs = em.createNamedQuery("JavaYouLog.findAll", JavaYouLog.class)
                 .getResultList();
 
-        JavaYouLog log = new JavaYouLog();
-        log.setText1(text1);
-        log.setText2(text2);
-        em.persist(log);
+        event.fire(new JavaYouEvent(text1, text2));
     }
 
     private void buildImageUrl() {
