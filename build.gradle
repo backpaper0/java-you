@@ -15,7 +15,7 @@ repositories {
 
 dependencies {
     providedCompile 'javax:javaee-api:7.0'
-    testCompile 'fish.payara.extras:payara-micro:4.1.1.154'
+    testCompile 'fish.payara.extras:payara-micro:4.1.1.164'
 }
 
 //HEADコミットのハッシュ値を書き出すタスク。
