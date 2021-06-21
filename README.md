@@ -45,7 +45,7 @@ mvn cargo:run -Ptomee
 
 ## License
 
-[Apache License Version 2.0](apache.org/licenses/LICENSE-2.0.txt)
+[The MIT License](https://opensource.org/licenses/MIT)
 
 ## Author
 
