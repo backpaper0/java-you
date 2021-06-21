@@ -1,8 +1,4 @@
-/bin/
-/build/
-/derby.log
-/.*
-!/.gitignore
-/*.iml
-/*.ipr
-/*.iws
+.*
+!.gitignore
+!.mvn/
+target/

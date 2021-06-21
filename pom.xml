@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.example</groupId>
+	<artifactId>java-you</artifactId>
+	<version>0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>jakarta.platform</groupId>
+			<artifactId>jakarta.jakartaee-api</artifactId>
+			<version>8.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.200</version>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven3-plugin</artifactId>
+				<version>1.9.4</version>
+				<configuration>
+					<configuration>
+						<datasources>
+							<datasource>
+								<jndiName>java/DemoDS</jndiName>
+								<driverClass>org.h2.Driver</driverClass>
+								<url>jdbc:h2:mem:demo;DB_CLOSE_DELAY=-1</url>
+								<username>demouser</username>
+								<password>demosecret</password>
+							</datasource>
+						</datasources>
+					</configuration>
+					<container>
+						<dependencies>
+							<dependency>
+								<groupId>com.h2database</groupId>
+								<artifactId>h2</artifactId>
+							</dependency>
+						</dependencies>
+					</container>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>wildfly</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<cargo.maven.containerId>wildfly22x</cargo.maven.containerId>
+				<cargo.maven.containerUrl>https://download.jboss.org/wildfly/22.0.1.Final/wildfly-22.0.1.Final.zip</cargo.maven.containerUrl>
+			</properties>
+		</profile>
+		<profile>
+			<id>payara</id>
+			<properties>
+				<cargo.maven.containerId>payara</cargo.maven.containerId>
+				<cargo.maven.containerUrl>https://repo.maven.apache.org/maven2/fish/payara/distributions/payara/5.2021.4/payara-5.2021.4.zip</cargo.maven.containerUrl>
+			</properties>
+		</profile>
+		<profile>
+			<id>tomee</id>
+			<properties>
+				<cargo.maven.containerId>tomee8x</cargo.maven.containerId>
+				<cargo.maven.containerUrl>https://repo.maven.apache.org/maven2/org/apache/tomee/apache-tomee/8.0.7/apache-tomee-8.0.7-plus.zip</cargo.maven.containerUrl>
+			</properties>
+		</profile>
+	</profiles>
+</project>

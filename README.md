@@ -1,9 +1,8 @@
-あなたとJAVAジェネレータ
-==================================================
+# あなたとJAVAジェネレータ
 
 ## Overview
 
-[Payara Micro](http://payara.co/home)を試す為にシンプルなJava EEアプリケーションを書いてみてる。
+[Payara Micro](http://payara.co/home)を試す為に作ったシンプルなJava EEアプリケーションだったけどcargo-maven3-pluginを使ってWildFlyやPayaraで動かすように変更。
 
 使っているEEな技術〜
 
@@ -14,35 +13,35 @@
 * JPA
 * Bean Validation
 
-Java EEフォーエバー(～ 'ω' )～
+Java EE/Jakarta EEフォーエバー(～ 'ω' )～
 
 ## How to Run
 
-IDEで `src/test/java/javayou/JavaYou.java` を実行する。
-
-もしくは[Gradle](https://gradle.org/)でビルドして[Payara Micro](http://www.payara.co/introducing_payara_micro)のJARで動かす。
-Payara Microで動かすためのGradleタスクを書いたので次のコマンドで実行できる。
+まずはWARを作る。
 
 ```
-gradlew run
+mvn package
 ```
 
-"Deployed 1 wars"というログが出たら起動完了。
+それからCargoでアプリケーションサーバーを動かす。
+
+```
+mvn cargo:run
+```
+
 http://localhost:8080/java-you/ を今すぐ開いてあなたとJAVA！
 
-### Docker
-
-Dockerfileも用意してみたのでイメージ作ってみるも良し！
-タスク作ったのでGradleでビルドできるます。
+Payaraで動かしたい場合は`-Ppayara`を付ければ良い。
 
 ```
-gradlew dockerBuild
-docker run -d -p 8080:8080 java-you
+mvn cargo:run -Ppayara
 ```
 
-## Roadmap
+TomEEは`-Ptomee`。
 
-[WildFly-Swarm](https://github.com/wildfly-swarm/wildfly-swarm)も気になってる。
+```
+mvn cargo:run -Ptomee
+```
 
 ## License
 
