@@ -20,13 +20,13 @@ Java EE/Jakarta EEフォーエバー(～ 'ω' )～
 まずはWARを作る。
 
 ```
-mvn package
+./mvnw package
 ```
 
 それからCargoでアプリケーションサーバーを動かす。
 
 ```
-mvn cargo:run
+./mvnw cargo:run
 ```
 
 http://localhost:8080/java-you/ を今すぐ開いてあなたとJAVA！
@@ -34,13 +34,13 @@ http://localhost:8080/java-you/ を今すぐ開いてあなたとJAVA！
 Payaraで動かしたい場合は`-Ppayara`を付ければ良い。
 
 ```
-mvn cargo:run -Ppayara
+./mvnw cargo:run -Ppayara
 ```
 
 TomEEは`-Ptomee`。
 
 ```
-mvn cargo:run -Ptomee
+./mvnw cargo:run -Ptomee
 ```
 
 ## License
