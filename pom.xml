@@ -40,7 +40,7 @@
 					<configuration>
 						<datasources>
 							<datasource>
-								<jndiName>java/DemoDS</jndiName>
+								<jndiName>jdbc/DemoDS</jndiName>
 								<driverClass>org.h2.Driver</driverClass>
 								<url>jdbc:h2:mem:demo;DB_CLOSE_DELAY=-1</url>
 								<username>demouser</username>
@@ -55,6 +55,9 @@
 								<artifactId>h2</artifactId>
 							</dependency>
 						</dependencies>
+						<systemProperties>
+							<javax.persistence.schema-generation.database.action>create</javax.persistence.schema-generation.database.action>
+						</systemProperties>
 					</container>
 				</configuration>
 			</plugin>
