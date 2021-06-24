@@ -11,6 +11,7 @@
 * CDI
 * Concurrency Utilities for Java EE
 * JPA
+* JTA
 * Bean Validation
 
 Java EE/Jakarta EEフォーエバー(～ 'ω' )～
@@ -23,7 +24,7 @@ Java EE/Jakarta EEフォーエバー(～ 'ω' )～
 ./mvnw package
 ```
 
-それからCargoでアプリケーションサーバーを動かす。
+それからCargoでアプリケーションサーバー(WildFly)を動かす。
 
 ```
 ./mvnw cargo:run
