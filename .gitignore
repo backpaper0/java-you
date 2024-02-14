@@ -1,4 +1,5 @@
 .*
 !.gitignore
 !.mvn/
+!.tool-versions
 target/
