@@ -50,7 +50,7 @@ public class JavaYouResource {
                 BufferedImage image = ImageIO.read(in);
                 Graphics2D g = image.createGraphics();
 
-                //指定したフォントが無いければデフォルトのフォントが使われるっぽい
+                //指定したフォントが無ければデフォルトのフォントが使われるっぽい
                 g.setFont(new Font("Yutapon coding RegularBackslash",
                         Font.BOLD, 24));
 
